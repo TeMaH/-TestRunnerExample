@@ -32,6 +32,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IInput
+{
+    bool IsLeft { get; }
+    bool IsRight { get; }
+}
+
+public class InputByKeyboard : IInput
+{
+    public bool IsLeft => Input.GetKey(KeyCode.LeftArrow);
+    public bool IsRight => Input.GetKey(KeyCode.RightArrow);
+}
+
 public class Ship : MonoBehaviour
 {
     public bool isDead = false;
@@ -50,6 +62,13 @@ public class Ship : MonoBehaviour
     private float maxLeft = -8;
     private float maxRight = 8;
 
+    private IInput _input;
+
+    public void Init(IInput input)
+    {
+        _input = input;
+    }
+
     private void Update()
     {
         if (isDead)
@@ -62,12 +81,12 @@ public class Ship : MonoBehaviour
             ShootLaser();
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (_input != null && _input.IsLeft)
         {
             MoveLeft();
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (_input != null && _input.IsRight)
         {
             MoveRight();
         }

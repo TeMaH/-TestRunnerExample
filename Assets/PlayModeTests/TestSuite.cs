@@ -20,15 +20,8 @@ public class TestSuite
     {
         Object.Destroy(_game.gameObject);
     }
-
-    [Test]
-    public void MathFMin()
-    {
-        var minValue = Mathf.Min(-1000.0f, -1.0f);
-        Assert.IsTrue(minValue == -1000.0f);
-    }
-
-        [UnityTest]
+    
+    [UnityTest]
     public IEnumerator AsteroidsMoveDown()
     {
         GameObject asteroid = _game.GetSpawner().SpawnAsteroid();

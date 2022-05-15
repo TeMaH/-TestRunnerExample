@@ -86,6 +86,7 @@ public class Game : MonoBehaviour
         shipModel.GetComponent<Ship>().RepairShip();
         spawner.ClearAsteroids();
         gameOverText.enabled = false;
+        GetShip().Init(new InputByKeyboard());
     }
 
     public static void AsteroidDestroyed()
